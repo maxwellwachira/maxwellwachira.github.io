@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/styles.css" />
+    <title>JS Calculator</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="slider">
+            <div id="tooltip">
+                <div class="tooltip-text">
+                    <div id="slider-value">0</div>
+                </div>
+            </div>
+            <input type="range" id="my-slider" min="500" max="500000" step="500" value="500" oninput="slider()">
+        </div>
+        <div class="grid-container">
+            <div class="grid-item-1">
+                <div class="pricing-text">
+                    £
+                    <span id="monthly-cost">0.00</span>
+                    <span class="gray-text">/month</span>
+                </div>
+                <br />
+                <div class="gray-text">
+                    Normally £
+                    <span id="normal-cost">0.00</span>
+                    <a href="#" class="gray-text">Learn More</a>
+                </div>
+                <div class="center">
+                    <a class="sign-up">
+                        Sign up now
+                    </a>
+                </div>
+            </div>
+
+            <div class="grid-item-2">
+                <div class="features-heading">Included in price:</div>
+                <ul>
+                    <li>Up to <span id="contacts">0</span> contacts</li>
+                    <li>Up to <span id="email-sends">0</span> email sends</li>
+                    <div id="more-features"></div>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <script src="./js/script.js"></script>
+</body>
+</html>

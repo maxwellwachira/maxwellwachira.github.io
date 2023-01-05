@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Calculator</title>
+</head>
+
+<body>
+    <main>
+        <style>
+            .center {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+            }
+
+            .container {
+                max-width: 800px;
+                margin: 50px auto;
+                border: 1px solid #d5d5d5;
+                padding: 20px;
+                border-radius: 10px;
+                height: auto;
+            }
+
+            .features-heading {
+                font-weight: 600;
+                font-size: 18px;
+            }
+
+            .grid-container {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+                grid-template-rows: auto;
+                justify-items: center;
+            }
+
+            .grid-item-1 {
+                display: flex;
+                flex-direction: column;
+                width: 290px;
+                background: #faf7f2;
+                border-radius: 20px;
+                padding: 30px;
+            }
+
+            .grid-item-2 {
+                display: flex;
+                flex-direction: column;
+                width: 300px;
+
+            }
+
+            .gray-text {
+                color: gray;
+                font-weight: normal;
+            }
+
+            .pricing-text {
+                font-size: 35px;
+                font-weight: 700;
+            }
+
+            input[type="range"] {
+                -webkit-box-flex: 0;
+                -webkit-appearance: none;
+                appearance: none;
+                background: transparent;
+                -ms-flex: 0 0 100%;
+                flex: 0 0 100%;
+                margin: 18px 0;
+                width: 100%;
+            }
+
+            input[type="range"]::-webkit-slider-runnable-track {
+                border: 0 solid #ebebeb;
+                border-radius: 5px;
+                cursor: pointer;
+                height: 10px;
+                -webkit-transition: all .2s ease;
+                transition: all .2s ease;
+                width: 100%
+            }
+
+            input[type="range"]::-moz-range-track {
+                background: #ebebeb;
+                border: 0 solid #ebebeb;
+                border-radius: 5px;
+                cursor: pointer;
+                height: 10px;
+                height: 5px;
+                -moz-transition: all .2s ease;
+                transition: all .2s ease;
+                width: 100%
+            }
+
+            input[type="range"]::-ms-track {
+                background: transparent;
+                border-color: transparent;
+                border-width: 18px 0;
+                color: transparent;
+                cursor: pointer;
+                height: 10px;
+                -ms-transition: all .2s ease;
+                transition: all .2s ease;
+                width: 100%
+            }
+
+            input[type="range"]:active::-webkit-slider-thumb {
+                -webkit-box-shadow: 0 0 12px 1px yellowgreen;
+                box-shadow: 0 0 12px 1px yellowgreen;
+            }
+
+            input[type="range"]::-webkit-slider-thumb {
+                -webkit-appearance: none;
+                background-color: #000;
+                background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 10"><g fill="yellowgreen"><polygon points="0.4 5 7.8 0 7.8 10 "/><polygon points="19.6 5 12.2 10 12.2 0 "/></g></svg>');
+                background-position: 50%;
+                background-repeat: no-repeat;
+                background-size: 20px;
+                border: 0 solid #000;
+                border-radius: 36px;
+                -webkit-box-shadow: 0 0 10px 0 yellowgreen;
+                box-shadow: 0 0 10px 0 yellowgreen;
+                cursor: pointer;
+                height: 36px;
+                margin-top: -13px;
+                -webkit-transition: box-shadow .1s ease;
+                transition: box-shadow .1s ease;
+                width: 36px;
+            }
+
+            input[type="range"]::-moz-range-thumb {
+                background-color: #000;
+                background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 10"><g fill="yellowgreen"><polygon points="0.4 5 7.8 0 7.8 10 "/><polygon points="19.6 5 12.2 10 12.2 0 "/></g></svg>');
+                background-position: 50%;
+                background-repeat: no-repeat;
+                background-size: 20px;
+                border: 0 solid #000;
+                border-radius: 36px;
+                box-shadow: 0 0 10px 0 yellowgreen;
+                cursor: pointer;
+                height: 32px;
+                -moz-transition: box-shadow .1s ease;
+                transition: box-shadow .1s ease;
+                width: 32px;
+            }
+
+            input[type="range"]::-ms-thumb {
+                background-color: #000;
+                background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 10"><g fill="yellowgreen"><polygon points="0.4 5 7.8 0 7.8 10 "/><polygon points="19.6 5 12.2 10 12.2 0 "/></g></svg>');
+                background-position: 50%;
+                background-repeat: no-repeat;
+                background-size: 20px;
+                border: 0 solid #000;
+                border-radius: 36px;
+                box-shadow: 0 0 10px 0 yellowgreen;
+                cursor: pointer;
+                height: 32px;
+                margin-top: 2.5px;
+                -ms-transition: box-shadow .1s ease;
+                transition: box-shadow .1s ease;
+                width: 32px;
+            }
+
+            li {
+                list-style: none;
+                margin-left: 0;
+                padding-left: 0;
+
+            }
+
+            li::before {
+                content: '';
+                display: inline-block;
+                height: 12px;
+                width: 12px;
+                margin-right: 5px;
+                margin-left: -35px;
+                margin-top: 10px;
+                background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M470.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L192 338.7 425.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"/></svg>');
+            }
+
+
+            .sign-up {
+                background: black;
+                color: yellowgreen;
+                font-weight: 600;
+                font-size: 20px;
+                padding: 18px;
+                border-radius: 8px;
+                text-align: center;
+                margin-top: 30px;
+                margin-bottom: 10px;
+                margin-left: auto;
+                margin-right: auto;
+                width: 220px;
+                cursor: pointer;
+            }
+
+            .sign-up:hover {
+                opacity: 0.7;
+            }
+
+            .slider {
+                display: flex;
+                margin: 30px 20px;
+            }
+
+
+            #tooltip {
+                position: absolute;
+                margin-top: -10px;
+            }
+
+            .tooltip-text {
+                width: 80px;
+                background-color: black;
+                color: #fff;
+                text-align: center;
+                border-radius: 6px;
+                padding: 5px 0;
+                position: absolute;
+                z-index: 1;
+                bottom: 150%;
+                left: 50%;
+                margin-left: -60px;
+            }
+
+            .tooltip-text::after {
+                content: "";
+                position: absolute;
+                top: 100%;
+                left: 50%;
+                margin-left: -5px;
+                border-width: 5px;
+                border-style: solid;
+                border-color: black transparent transparent transparent;
+            }
+
+
+            @media (max-width: 600px) {
+                .grid-container {
+                    grid-template-columns: 1fr;
+                }
+
+                .grid-item-1 {
+                    width: 280px;
+                }
+
+                .grid-item-2 {
+                    width: 280px;
+                }
+            }
+        </style>
+        <div class="container">
+            <div class="slider">
+                <div id="tooltip">
+                    <div class="tooltip-text">
+                        <div id="slider-value">0</div>
+                    </div>
+                </div>
+                <input type="range" id="my-slider" min="500" max="500000" step="500" value="500" oninput="slider()">
+            </div>
+            <div class="grid-container">
+                <div class="grid-item-1">
+                    <div class="pricing-text">
+                        £
+                        <span id="monthly-cost">0.00</span>
+                        <span class="gray-text">/month</span>
+                    </div>
+                    <br />
+                    <div class="gray-text">
+                        Normally £
+                        <span id="normal-cost">0.00</span>
+                        <a href="#" class="gray-text">Learn More</a>
+                    </div>
+                    <div class="center">
+                        <a class="sign-up">
+                            Sign up now
+                        </a>
+                    </div>
+                </div>
+
+                <div class="grid-item-2">
+                    <div class="features-heading">Included in price:</div>
+                    <ul>
+                        <li>Up to <span id="contacts">0</span> contacts</li>
+                        <li>Up to <span id="email-sends">0</span> email sends</li>
+                        <div id="more-features"></div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <script>
+            const mySlider = document.getElementById("my-slider");
+            const sliderValue = document.getElementById("slider-value");
+            const monthlyCost = document.getElementById("monthly-cost");
+            const normalCost = document.getElementById("normal-cost");
+            const contacts = document.getElementById("contacts");
+            const emailSends = document.getElementById("email-sends");
+            const moreFeatures = document.getElementById("more-features");
+            const tooltip = document.getElementById("tooltip");
+
+            const numberWithCommas = (num) => {
+                return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            }
+
+            const computeEmailAndCost = () => {
+                const value = Number(mySlider.value);
+                const emailSends = value === 500 ? 0 : value * 5;
+                const normally = value === 500 ? 0.00 : value === 1000 ? 25.00 : 25.00 + ((value / 500) - 2) * 2.5;
+                const monthlyCost = normally * 0.7;
+                return {
+                    emailSends,
+                    monthlyCost: monthlyCost.toFixed(2),
+                    normally: normally.toFixed(2)
+                }
+            }
+
+            const featuresList = () => {
+                const value = Number(mySlider.value);
+                if (value >= 0 && value <= 50000) return (`<li>Community and email support</li>`);
+                else if (value > 50000 && value <= 100000) return (
+
+                    `<li>Community, email and Zoom support</li>
+                    <li>Personalised onboarding</li>
+                    <li>Team training sessions</li>`
+
+                )
+                return (
+
+                    `<li>Community, email and Zoom support</li>
+                    <li>Personalised onboarding</li>
+                    <li>Team training sessions</li>
+                    <li>Hands-on migration support</li>
+                    <li>Dedicated success coach</li>`
+                )
+            }
+
+            const computeOffset = (value) => {
+                if (value >= 500 && value <= 40000) return 35;
+                else if (value > 40000 && value <= 110000) return 33;
+                else if (value > 110000 && value <= 200000) return 30;
+                else if (value > 200000 && value <= 350000) return 25;
+                return 20;
+            }
+
+            const slider = () => {
+                const value = Number(mySlider.value);
+                const valPercent = (value / mySlider.max) * 100;
+                mySlider.style.background = `linear-gradient(to right, black ${valPercent}%, #d5d5d5 ${valPercent}%)`;
+                const width = mySlider.clientWidth - 15;
+                const offset = computeOffset(value);
+                const position = width * (valPercent / 100) + offset;
+                tooltip.style.marginLeft = `${position}px`;
+                sliderValue.textContent = numberWithCommas(value);
+                monthlyCost.textContent = numberWithCommas(computeEmailAndCost().monthlyCost);
+                normalCost.textContent = numberWithCommas(computeEmailAndCost().normally);
+                emailSends.textContent = numberWithCommas(computeEmailAndCost().emailSends);
+                contacts.textContent = numberWithCommas(value);
+                moreFeatures.innerHTML = featuresList();
+            }
+
+            window.onload = () => {
+                slider();
+            }
+
+        </script>
+    </main>
+</body>
+</html>
